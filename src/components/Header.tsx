@@ -9,25 +9,25 @@ const Header = () => {
   const { t, isRTL } = useLanguage();
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-gray-100 z-50">
+    <header className="fixed top-0 left-0 right-0 bg-purple-600 backdrop-blur-lg border-b border-purple-700 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-primary-600">SmartLine</h1>
+              <h1 className="text-2xl font-bold text-white">SmartLine</h1>
             </div>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
-            <a href="#home" className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
+            <a href="#home" className="text-white hover:text-purple-200 font-medium transition-colors">
               {t('nav.home')}
             </a>
-            <a href="#about" className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
+            <a href="#about" className="text-white hover:text-purple-200 font-medium transition-colors">
               {t('nav.about')}
             </a>
-            <a href="#contact" className="text-gray-700 hover:text-primary-600 font-medium transition-colors">
+            <a href="#contact" className="text-white hover:text-purple-200 font-medium transition-colors">
               {t('nav.contact')}
             </a>
             <LanguageToggle />
@@ -38,7 +38,7 @@ const Header = () => {
             <LanguageToggle />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-primary-600 transition-colors"
+              className="text-white hover:text-purple-200 transition-colors"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -47,25 +47,25 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-100">
+          <div className="md:hidden py-4 border-t border-purple-700">
             <nav className="flex flex-col space-y-4">
               <a
                 href="#home"
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors px-2 py-1"
+                className="text-white hover:text-purple-200 font-medium transition-colors px-2 py-1"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t('nav.home')}
               </a>
               <a
                 href="#about"
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors px-2 py-1"
+                className="text-white hover:text-purple-200 font-medium transition-colors px-2 py-1"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t('nav.about')}
               </a>
               <a
                 href="#contact"
-                className="text-gray-700 hover:text-primary-600 font-medium transition-colors px-2 py-1"
+                className="text-white hover:text-purple-200 font-medium transition-colors px-2 py-1"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t('nav.contact')}
