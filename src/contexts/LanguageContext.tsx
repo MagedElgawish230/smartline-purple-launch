@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Language = 'en' | 'ar';
@@ -23,12 +22,6 @@ const translations = {
     'hero.description': 'Safe, reliable, and affordable rides at your fingertips. Book your ride in seconds and travel with confidence.',
     'hero.cta': 'Get Started',
     'hero.download': 'Download App',
-    'hero.drive.title': 'Drive with SmartLine',
-    'hero.drive.description': 'Earn money on your schedule. Join thousands of drivers making extra income.',
-    'hero.drive.cta': 'Start Driving',
-    'hero.ride.title': 'Ride with SmartLine',
-    'hero.ride.description': 'Get where you need to go quickly and safely with just a few taps.',
-    'hero.ride.cta': 'Get a Ride',
     
     // About Section
     'about.title': 'About SmartLine',
@@ -41,18 +34,9 @@ const translations = {
     'about.affordable.description': 'Transparent pricing with no hidden fees. Pay what you see upfront.',
     
     // Download Section
-    'download.title': 'Download SmartLine Apps',
-    'download.subtitle': 'Get the app that suits your needs',
-    'download.driver.title': 'SmartLine Driver',
-    'download.driver.description': 'Start earning money by driving with SmartLine. Flexible hours, competitive rates.',
-    'download.driver.benefit1': 'Earn up to $25/hour',
-    'download.driver.benefit2': 'Insurance coverage included',
-    'download.driver.benefit3': 'Flexible working hours',
-    'download.customer.title': 'SmartLine Rider',
-    'download.customer.description': 'Get reliable rides whenever you need them. Safe, fast, and affordable.',
-    'download.customer.benefit1': 'Quick and easy booking',
-    'download.customer.benefit2': 'Real-time tracking',
-    'download.customer.benefit3': 'Multiple payment options',
+    'download.title': 'Download SmartLine',
+    'download.subtitle': 'Get the app and start your journey',
+    'download.description': 'Available on all platforms. Download now and get your first ride free!',
     'download.ios': 'Download on the App Store',
     'download.android': 'Get it on Google Play',
     
@@ -65,23 +49,6 @@ const translations = {
     'promo.weekend.description': 'Enjoy 20% discount on all weekend rides. Valid Friday to Sunday.',
     'promo.premium.title': 'Premium Member Benefits',
     'promo.premium.description': 'Join Premium and get priority booking, luxury cars, and exclusive discounts.',
-    
-    // Referral Section
-    'referral.title': 'Invite Friends & Earn Points',
-    'referral.subtitle': 'Share SmartLine with friends and earn rewards for every successful referral',
-    'referral.earn.title': 'Earn 250 Points',
-    'referral.earn.description': 'Get 250 points for every friend who signs up and takes their first ride using your code.',
-    'referral.invite.title': 'Easy Sharing',
-    'referral.invite.description': 'Share your unique referral code with friends through social media, email, or text.',
-    'referral.rewards.title': 'Redeem Rewards',
-    'referral.rewards.description': 'Use your points for free rides, discounts, or premium features in the app.',
-    'referral.points.title': 'Points Per Referral',
-    'referral.points.description': 'Each successful invitation earns you 250 points that you can redeem for rewards.',
-    'referral.code.label': 'Your Referral Code:',
-    'referral.enter.title': 'Have a Referral Code?',
-    'referral.enter.description': 'Enter a friend\'s referral code to get bonus points on your first ride.',
-    'referral.enter.placeholder': 'Enter referral code',
-    'referral.enter.submit': 'Apply Code',
     
     // Testimonials Section
     'testimonials.title': 'What Our Users Say',
@@ -144,12 +111,6 @@ const translations = {
     'hero.description': 'رحلات آمنة وموثوقة وبأسعار معقولة في متناول يدك. احجز رحلتك في ثوانٍ وسافر بثقة.',
     'hero.cta': 'ابدأ الآن',
     'hero.download': 'تحميل التطبيق',
-    'hero.drive.title': 'قد مع سمارت لاين',
-    'hero.drive.description': 'اكسب المال وفقاً لجدولك الزمني. انضم إلى آلاف السائقين الذين يحققون دخلاً إضافياً.',
-    'hero.drive.cta': 'ابدأ القيادة',
-    'hero.ride.title': 'اركب مع سمارت لاين',
-    'hero.ride.description': 'اذهب إلى حيث تريد بسرعة وأمان ببضع نقرات فقط.',
-    'hero.ride.cta': 'احجز رحلة',
     
     // About Section
     'about.title': 'عن سمارت لاين',
@@ -162,18 +123,9 @@ const translations = {
     'about.affordable.description': 'تسعير شفاف بدون رسوم خفية. ادفع ما تراه مقدماً.',
     
     // Download Section
-    'download.title': 'تحميل تطبيقات سمارت لاين',
-    'download.subtitle': 'احصل على التطبيق الذي يناسب احتياجاتك',
-    'download.driver.title': 'سمارت لاين للسائقين',
-    'download.driver.description': 'ابدأ في كسب المال من خلال القيادة مع سمارت لاين. ساعات مرنة، أسعار تنافسية.',
-    'download.driver.benefit1': 'اكسب حتى 25 دولار/ساعة',
-    'download.driver.benefit2': 'تغطية تأمينية شاملة',
-    'download.driver.benefit3': 'ساعات عمل مرنة',
-    'download.customer.title': 'سمارت لاين للركاب',
-    'download.customer.description': 'احصل على رحلات موثوقة كلما احتجت إليها. آمنة وسريعة وبأسعار معقولة.',
-    'download.customer.benefit1': 'حجز سريع وسهل',
-    'download.customer.benefit2': 'تتبع في الوقت الفعلي',
-    'download.customer.benefit3': 'خيارات دفع متعددة',
+    'download.title': 'تحميل سمارت لاين',
+    'download.subtitle': 'احصل على التطبيق وابدأ رحلتك',
+    'download.description': 'متوفر على جميع المنصات. حمل الآن واحصل على رحلتك الأولى مجاناً!',
     'download.ios': 'التحميل من App Store',
     'download.android': 'التحميل من Google Play',
     
@@ -186,23 +138,6 @@ const translations = {
     'promo.weekend.description': 'استمتع بخصم 20% على جميع رحلات عطلة نهاية الأسبوع. صالح من الجمعة إلى الأحد.',
     'promo.premium.title': 'مزايا العضوية المميزة',
     'promo.premium.description': 'انضم للعضوية المميزة واحصل على أولوية الحجز وسيارات فاخرة وخصومات حصرية.',
-    
-    // Referral Section
-    'referral.title': 'ادع الأصدقاء واكسب النقاط',
-    'referral.subtitle': 'شارك سمارت لاين مع الأصدقاء واحصل على مكافآت مقابل كل إحالة ناجحة',
-    'referral.earn.title': 'اكسب 250 نقطة',
-    'referral.earn.description': 'احصل على 250 نقطة مقابل كل صديق يسجل ويأخذ رحلته الأولى باستخدام كودك.',
-    'referral.invite.title': 'مشاركة سهلة',
-    'referral.invite.description': 'شارك كود الإحالة الفريد الخاص بك مع الأصدقاء عبر وسائل التواصل الاجتماعي أو البريد الإلكتروني أو الرسائل النصية.',
-    'referral.rewards.title': 'استبدل المكافآت',
-    'referral.rewards.description': 'استخدم نقاطك للحصول على رحلات مجانية أو خصومات أو ميزات مميزة في التطبيق.',
-    'referral.points.title': 'نقاط لكل إحالة',
-    'referral.points.description': 'كل دعوة ناجحة تكسبك 250 نقطة يمكنك استبدالها بمكافآت.',
-    'referral.code.label': 'كود الإحالة الخاص بك:',
-    'referral.enter.title': 'لديك كود إحالة؟',
-    'referral.enter.description': 'أدخل كود إحالة صديق للحصول على نقاط إضافية في رحلتك الأولى.',
-    'referral.enter.placeholder': 'أدخل كود الإحالة',
-    'referral.enter.submit': 'تطبيق الكود',
     
     // Testimonials Section
     'testimonials.title': 'ماذا يقول مستخدمونا',
