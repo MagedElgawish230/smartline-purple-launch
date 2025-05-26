@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Language = 'en' | 'ar';
@@ -23,6 +22,16 @@ const translations = {
     'hero.description': 'Safe, reliable, and affordable rides at your fingertips. Book your ride in seconds and travel with confidence.',
     'hero.cta': 'Get Started',
     'hero.download': 'Download App',
+    
+    // About Section
+    'about.title': 'About SmartLine',
+    'about.subtitle': 'We are committed to providing safe, reliable, and affordable transportation solutions for everyone.',
+    'about.safety.title': 'Safety First',
+    'about.safety.description': 'Your safety is our top priority. All drivers are background-checked and vehicles are regularly inspected.',
+    'about.speed.title': 'Fast & Reliable',
+    'about.speed.description': 'Get a ride in minutes with our advanced matching algorithm and extensive driver network.',
+    'about.affordable.title': 'Affordable Prices',
+    'about.affordable.description': 'Transparent pricing with no hidden fees. Pay what you see upfront.',
     
     // Download Section
     'download.title': 'Download SmartLine',
@@ -54,6 +63,25 @@ const translations = {
     'testimonials.user3.role': 'Healthcare Worker',
     'testimonials.user3.text': 'Safe, reliable rides even during late hours. SmartLine gives me peace of mind.',
     
+    // Contact Section
+    'contact.title': 'Get in Touch',
+    'contact.subtitle': 'Have questions? We\'re here to help you 24/7.',
+    'contact.info.title': 'Contact Information',
+    'contact.phone.title': 'Phone',
+    'contact.phone.number': '+1 (555) 123-4567',
+    'contact.email.title': 'Email',
+    'contact.email.address': 'support@smartline.com',
+    'contact.address.title': 'Address',
+    'contact.address.location': '123 Innovation Drive, Tech City, TC 12345',
+    'contact.form.title': 'Send us a Message',
+    'contact.form.name': 'Full Name',
+    'contact.form.name.placeholder': 'Enter your full name',
+    'contact.form.email': 'Email Address',
+    'contact.form.email.placeholder': 'Enter your email address',
+    'contact.form.message': 'Message',
+    'contact.form.message.placeholder': 'How can we help you?',
+    'contact.form.submit': 'Send Message',
+    
     // Footer
     'footer.company': 'Company',
     'footer.about': 'About Us',
@@ -84,6 +112,16 @@ const translations = {
     'hero.cta': 'ابدأ الآن',
     'hero.download': 'تحميل التطبيق',
     
+    // About Section
+    'about.title': 'عن سمارت لاين',
+    'about.subtitle': 'نحن ملتزمون بتوفير حلول نقل آمنة وموثوقة وبأسعار معقولة للجميع.',
+    'about.safety.title': 'الأمان أولاً',
+    'about.safety.description': 'سلامتك أولويتنا القصوى. جميع السائقين يخضعون لفحص خلفية والمركبات تُفحص بانتظام.',
+    'about.speed.title': 'سريع وموثوق',
+    'about.speed.description': 'احصل على رحلة في دقائق مع خوارزمية المطابقة المتقدمة وشبكة السائقين الواسعة.',
+    'about.affordable.title': 'أسعار معقولة',
+    'about.affordable.description': 'تسعير شفاف بدون رسوم خفية. ادفع ما تراه مقدماً.',
+    
     // Download Section
     'download.title': 'تحميل سمارت لاين',
     'download.subtitle': 'احصل على التطبيق وابدأ رحلتك',
@@ -113,6 +151,25 @@ const translations = {
     'testimonials.user3.name': 'ماريا غارسيا',
     'testimonials.user3.role': 'عاملة صحية',
     'testimonials.user3.text': 'رحلات آمنة وموثوقة حتى في ساعات متأخرة. سمارت لاين يمنحني راحة البال.',
+    
+    // Contact Section
+    'contact.title': 'تواصل معنا',
+    'contact.subtitle': 'لديك أسئلة؟ نحن هنا لمساعدتك على مدار الساعة.',
+    'contact.info.title': 'معلومات الاتصال',
+    'contact.phone.title': 'الهاتف',
+    'contact.phone.number': '+1 (555) 123-4567',
+    'contact.email.title': 'البريد الإلكتروني',
+    'contact.email.address': 'support@smartline.com',
+    'contact.address.title': 'العنوان',
+    'contact.address.location': '123 طريق الابتكار، مدينة التقنية، TC 12345',
+    'contact.form.title': 'أرسل لنا رسالة',
+    'contact.form.name': 'الاسم الكامل',
+    'contact.form.name.placeholder': 'أدخل اسمك الكامل',
+    'contact.form.email': 'عنوان البريد الإلكتروني',
+    'contact.form.email.placeholder': 'أدخل عنوان بريدك الإلكتروني',
+    'contact.form.message': 'الرسالة',
+    'contact.form.message.placeholder': 'كيف يمكننا مساعدتك؟',
+    'contact.form.submit': 'إرسال الرسالة',
     
     // Footer
     'footer.company': 'الشركة',
