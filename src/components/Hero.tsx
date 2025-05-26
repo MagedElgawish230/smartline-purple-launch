@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { Car, Users } from 'lucide-react';
 
 const Hero = () => {
   const { t, isRTL } = useLanguage();
@@ -15,39 +16,53 @@ const Hero = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
-          <div className={`text-center lg:text-${isRTL ? 'right' : 'left'} animate-fade-in`}>
-            <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight ${isRTL ? 'font-cairo' : 'font-inter'}`}>
-              <span className="text-primary-600">SmartLine</span>
-              <br />
-              {t('hero.title')}
-            </h1>
-            
-            <p className={`text-xl text-gray-600 mb-8 max-w-2xl ${isRTL ? 'font-cairo' : 'font-inter'}`}>
-              {t('hero.description')}
-            </p>
+        <div className="text-center animate-fade-in mb-16">
+          <h1 className={`text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight ${isRTL ? 'font-cairo' : 'font-inter'}`}>
+            <span className="text-primary-600">SmartLine</span>
+          </h1>
+          <p className={`text-2xl font-semibold text-gray-700 mb-4 ${isRTL ? 'font-cairo' : 'font-inter'}`}>
+            {t('hero.title')}
+          </p>
+          <p className={`text-xl text-gray-600 mb-12 max-w-3xl mx-auto ${isRTL ? 'font-cairo' : 'font-inter'}`}>
+            {t('hero.description')}
+          </p>
+        </div>
 
-            <div className={`flex flex-col sm:flex-row gap-4 justify-center ${isRTL ? 'lg:justify-end' : 'lg:justify-start'}`}>
-              <button className="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                {t('hero.cta')}
-              </button>
-              <button className="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-200">
-                {t('hero.download')}
+        {/* Two App Options */}
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* Drive with SmartLine */}
+          <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+            <div className="text-center">
+              <div className="w-20 h-20 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Car className="w-10 h-10 text-white" />
+              </div>
+              <h3 className={`text-2xl font-bold text-gray-900 mb-4 ${isRTL ? 'font-cairo' : 'font-inter'}`}>
+                {t('hero.drive.title')}
+              </h3>
+              <p className={`text-gray-600 mb-6 ${isRTL ? 'font-cairo' : 'font-inter'}`}>
+                {t('hero.drive.description')}
+              </p>
+              <button className="w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl">
+                {t('hero.drive.cta')}
               </button>
             </div>
           </div>
 
-          {/* Phone Mockup */}
-          <div className="relative flex justify-center lg:justify-end animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            <div className="relative w-80 h-96 bg-gray-900 rounded-3xl p-2 shadow-2xl">
-              <div className="w-full h-full bg-gradient-to-br from-primary-500 to-primary-700 rounded-2xl flex items-center justify-center">
-                <div className="text-center text-white">
-                  <div className="text-6xl mb-4">📱</div>
-                  <div className="text-xl font-bold">SmartLine App</div>
-                  <div className="text-sm opacity-80 mt-2">Your ride awaits</div>
-                </div>
+          {/* Ride with SmartLine */}
+          <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+            <div className="text-center">
+              <div className="w-20 h-20 bg-gradient-to-r from-primary-500 to-primary-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Users className="w-10 h-10 text-white" />
               </div>
+              <h3 className={`text-2xl font-bold text-gray-900 mb-4 ${isRTL ? 'font-cairo' : 'font-inter'}`}>
+                {t('hero.ride.title')}
+              </h3>
+              <p className={`text-gray-600 mb-6 ${isRTL ? 'font-cairo' : 'font-inter'}`}>
+                {t('hero.ride.description')}
+              </p>
+              <button className="w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-4 rounded-xl font-semibold text-lg transition-all duration-200 shadow-lg hover:shadow-xl">
+                {t('hero.ride.cta')}
+              </button>
             </div>
           </div>
         </div>
