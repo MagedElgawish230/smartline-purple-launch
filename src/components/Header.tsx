@@ -14,7 +14,12 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 flex items-center space-x-3 rtl:space-x-reverse">
+              <img 
+                src="/lovable-uploads/793d3d62-f061-454e-a58f-87b865274de8.png" 
+                alt="SmartLine Logo" 
+                className="h-8 w-8"
+              />
               <h1 className="text-2xl font-bold text-white">SmartLine</h1>
             </div>
           </div>
