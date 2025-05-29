@@ -3,6 +3,10 @@ import React from 'react';
 import { LanguageProvider } from '../contexts/LanguageContext';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
+import GoAnywhereSection from '../components/GoAnywhereSection';
+import RecentActivitySection from '../components/RecentActivitySection';
+import DriveEarnSection from '../components/DriveEarnSection';
+import EasierInAppsSection from '../components/EasierInAppsSection';
 import AboutSection from '../components/AboutSection';
 import DownloadSection from '../components/DownloadSection';
 import PromotionsSection from '../components/PromotionsSection';
@@ -16,6 +20,10 @@ const Index = () => {
       <div className="min-h-screen">
         <Header />
         <Hero />
+        <GoAnywhereSection />
+        <RecentActivitySection />
+        <DriveEarnSection />
+        <EasierInAppsSection />
         <AboutSection />
         <DownloadSection />
         <PromotionsSection />
