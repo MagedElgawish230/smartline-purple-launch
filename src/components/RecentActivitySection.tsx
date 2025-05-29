@@ -12,20 +12,20 @@ const RecentActivitySection = () => {
           {/* Content */}
           <div className={`${isRTL ? 'font-cairo text-right' : 'font-inter'}`}>
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Log in to see your recent activity
+              {t('recent.title')}
             </h2>
             
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              View past trips, tailored suggestions, support resources, and more.
+              {t('recent.description')}
             </p>
 
             <div className="space-y-4">
-              <button className="bg-black text-white px-8 py-4 rounded-lg font-medium hover:bg-gray-800 transition-colors text-lg">
-                Log in to your account
+              <button className="bg-primary-600 text-white px-8 py-4 rounded-lg font-medium hover:bg-primary-700 transition-colors text-lg">
+                {t('recent.login')}
               </button>
               
               <p className="text-gray-600">
-                Don't have a SmartLine account? <span className="underline cursor-pointer hover:text-gray-900">Sign up</span>
+                {t('recent.signup.text')} <span className="underline cursor-pointer hover:text-gray-900">{t('recent.signup.link')}</span>
               </p>
             </div>
           </div>
@@ -35,7 +35,7 @@ const RecentActivitySection = () => {
             <div className="relative">
               <img
                 src="/lovable-uploads/017993f4-959f-4c9c-8b3a-ef124d31bbf5.png"
-                alt="Recent activity illustration"
+                alt={t('recent.image.alt')}
                 className="w-full h-auto rounded-lg shadow-lg"
               />
             </div>

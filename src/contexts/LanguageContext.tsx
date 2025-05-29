@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Language = 'en' | 'ar';
@@ -22,6 +23,38 @@ const translations = {
     'hero.description': 'Safe, reliable, and affordable rides at your fingertips. Book your ride in seconds and travel with confidence.',
     'hero.cta': 'Get Started',
     'hero.download': 'Download App',
+    
+    // Go Anywhere Section
+    'go.title': 'Go anywhere with SmartLine',
+    'go.pickup': 'Pickup location',
+    'go.dropoff': 'Dropoff location',
+    'go.today': 'Today',
+    'go.now': 'Now',
+    'go.see_prices': 'See prices',
+    'go.login_activity': 'Log in to see your recent activity',
+    'go.image.alt': 'Go anywhere illustration',
+    
+    // Recent Activity Section
+    'recent.title': 'Log in to see your recent activity',
+    'recent.description': 'View past trips, tailored suggestions, support resources, and more.',
+    'recent.login': 'Log in to your account',
+    'recent.signup.text': "Don't have a SmartLine account?",
+    'recent.signup.link': 'Sign up',
+    'recent.image.alt': 'Recent activity illustration',
+    
+    // Drive and Earn Section
+    'drive.title': 'Drive when you want, make what you need',
+    'drive.description': 'Make money on your schedule with deliveries or rides—or both. You can use your own car or choose a rental through SmartLine.',
+    'drive.cta': 'Get started',
+    'drive.signin.text': 'Already have an account?',
+    'drive.signin.link': 'Sign in',
+    'drive.image.alt': 'Drive and earn illustration',
+    
+    // Apps Section
+    'apps.title': "It's easier in the apps",
+    'apps.smartline.title': 'Download the SmartLine app',
+    'apps.driver.title': 'Download the Driver app',
+    'apps.scan': 'Scan to download',
     
     // About Section
     'about.title': 'About SmartLine',
@@ -111,6 +144,38 @@ const translations = {
     'hero.description': 'رحلات آمنة وموثوقة وبأسعار معقولة في متناول يدك. احجز رحلتك في ثوانٍ وسافر بثقة.',
     'hero.cta': 'ابدأ الآن',
     'hero.download': 'تحميل التطبيق',
+    
+    // Go Anywhere Section
+    'go.title': 'اذهب إلى أي مكان مع سمارت لاين',
+    'go.pickup': 'نقطة الانطلاق',
+    'go.dropoff': 'نقطة الوصول',
+    'go.today': 'اليوم',
+    'go.now': 'الآن',
+    'go.see_prices': 'عرض الأسعار',
+    'go.login_activity': 'تسجيل الدخول لعرض نشاطك الأخير',
+    'go.image.alt': 'اذهب إلى أي مكان',
+    
+    // Recent Activity Section
+    'recent.title': 'سجل الدخول لعرض نشاطك الأخير',
+    'recent.description': 'اعرض الرحلات السابقة والاقتراحات المخصصة وموارد الدعم والمزيد.',
+    'recent.login': 'تسجيل الدخول إلى حسابك',
+    'recent.signup.text': 'ليس لديك حساب سمارت لاين؟',
+    'recent.signup.link': 'إنشاء حساب',
+    'recent.image.alt': 'النشاط الأخير',
+    
+    // Drive and Earn Section
+    'drive.title': 'اقد متى تريد، اكسب ما تحتاج',
+    'drive.description': 'اكسب المال وفقاً لجدولك الزمني مع التوصيل أو الركوب - أو كليهما. يمكنك استخدام سيارتك الخاصة أو اختيار استئجار واحدة من خلال سمارت لاين.',
+    'drive.cta': 'ابدأ الآن',
+    'drive.signin.text': 'لديك حساب بالفعل؟',
+    'drive.signin.link': 'تسجيل الدخول',
+    'drive.image.alt': 'اقد واكسب',
+    
+    // Apps Section
+    'apps.title': 'الأمر أسهل في التطبيقات',
+    'apps.smartline.title': 'تحميل تطبيق سمارت لاين',
+    'apps.driver.title': 'تحميل تطبيق السائق',
+    'apps.scan': 'امسح للتحميل',
     
     // About Section
     'about.title': 'عن سمارت لاين',

@@ -14,7 +14,7 @@ const DriveEarnSection = () => {
             <div className="relative">
               <img
                 src="/lovable-uploads/dd732ec3-9677-420a-9509-a7d64d517b98.png"
-                alt="Drive and earn illustration"
+                alt={t('drive.image.alt')}
                 className="w-full h-auto rounded-lg shadow-lg"
               />
             </div>
@@ -23,20 +23,20 @@ const DriveEarnSection = () => {
           {/* Content */}
           <div className={`${isRTL ? 'lg:order-1 font-cairo text-right' : 'font-inter'}`}>
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Drive when you want, make what you need
+              {t('drive.title')}
             </h2>
             
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Make money on your schedule with deliveries or rides—or both. You can use your own car or choose a rental through SmartLine.
+              {t('drive.description')}
             </p>
 
             <div className="space-y-4">
-              <button className="bg-black text-white px-8 py-4 rounded-lg font-medium hover:bg-gray-800 transition-colors text-lg">
-                Get started
+              <button className="bg-primary-600 text-white px-8 py-4 rounded-lg font-medium hover:bg-primary-700 transition-colors text-lg">
+                {t('drive.cta')}
               </button>
               
               <p className="text-gray-600">
-                Already have an account? <span className="underline cursor-pointer hover:text-gray-900">Sign in</span>
+                {t('drive.signin.text')} <span className="underline cursor-pointer hover:text-gray-900">{t('drive.signin.link')}</span>
               </p>
             </div>
           </div>
