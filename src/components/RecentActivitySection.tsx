@@ -2,7 +2,6 @@
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
-import AuthModal from './AuthModal';
 import BookRideModal from './BookRideModal';
 import { Button } from './ui/button';
 import { Link } from 'react-router-dom';
@@ -41,19 +40,17 @@ const RecentActivitySection = () => {
                 </div>
               ) : (
                 <>
-                  <AuthModal>
+                  <Link to="/auth">
                     <Button className="bg-primary-600 text-white px-8 py-4 rounded-lg font-medium hover:bg-primary-700 transition-colors text-lg">
                       {t('recent.login')}
                     </Button>
-                  </AuthModal>
+                  </Link>
                   
                   <p className="text-gray-600">
                     {t('recent.signup.text')} 
-                    <AuthModal>
-                      <span className="underline cursor-pointer hover:text-gray-900 ml-1">
-                        {t('recent.signup.link')}
-                      </span>
-                    </AuthModal>
+                    <Link to="/auth" className="underline hover:text-gray-900 ml-1">
+                      {t('recent.signup.link')}
+                    </Link>
                   </p>
                 </>
               )}

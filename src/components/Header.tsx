@@ -4,7 +4,6 @@ import { Menu, X, User } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import LanguageToggle from './LanguageToggle';
-import AuthModal from './AuthModal';
 import { Button } from './ui/button';
 import { Link } from 'react-router-dom';
 
@@ -51,11 +50,11 @@ const Header = () => {
                 </Button>
               </div>
             ) : (
-              <AuthModal>
+              <Link to="/auth">
                 <Button variant="ghost" className="text-white hover:text-primary-200">
                   Sign In
                 </Button>
-              </AuthModal>
+              </Link>
             )}
             
             <LanguageToggle />
@@ -119,11 +118,13 @@ const Header = () => {
                   </button>
                 </>
               ) : (
-                <AuthModal>
-                  <span className="text-white hover:text-primary-200 font-medium transition-colors px-2 py-1 cursor-pointer">
-                    Sign In
-                  </span>
-                </AuthModal>
+                <Link
+                  to="/auth"
+                  className="text-white hover:text-primary-200 font-medium transition-colors px-2 py-1"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Sign In
+                </Link>
               )}
             </nav>
           </div>
