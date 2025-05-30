@@ -6,15 +6,17 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
+import LanguageToggle from '@/components/LanguageToggle';
 
 const Auth = () => {
   const location = useLocation();
-  const [isLogin, setIsLogin] = useState(false); // Default to signup
+  const [isLogin, setIsLogin] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { signIn, signUp } = useAuth();
+  const { t, isRTL } = useLanguage();
 
-  // Check if we should show login or signup based on URL or query params
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const mode = urlParams.get('mode');
@@ -58,27 +60,29 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center p-4">
+    <div className={`min-h-screen bg-gradient-to-br from-primary-50 to-primary-100 flex items-center justify-center p-4 ${isRTL ? 'font-cairo' : 'font-inter'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       <div className="w-full max-w-md">
+        {/* Language Toggle */}
+        <div className="flex justify-center mb-6">
+          <LanguageToggle />
+        </div>
+
         {/* Logo */}
         <div className="text-center mb-8">
           <Link to="/">
             <h1 className="text-4xl font-bold text-primary-600 mb-2">SmartLine</h1>
           </Link>
-          <p className="text-gray-600">Your smart transportation solution</p>
+          <p className="text-gray-600">{t('auth.tagline')}</p>
         </div>
 
         {/* Auth Card */}
         <Card className="shadow-xl border-0">
           <CardHeader className="space-y-1 text-center">
             <CardTitle className="text-2xl font-bold">
-              {isLogin ? 'Welcome Back' : 'Get Started'}
+              {isLogin ? t('auth.welcome.back') : t('auth.get.started')}
             </CardTitle>
             <CardDescription>
-              {isLogin 
-                ? 'Sign in to your account to continue' 
-                : 'Create your SmartLine account today'
-              }
+              {isLogin ? t('auth.signin.description') : t('auth.signup.description')}
             </CardDescription>
           </CardHeader>
           
@@ -86,45 +90,48 @@ const Auth = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               {!isLogin && (
                 <div className="space-y-2">
-                  <Label htmlFor="fullName">Full Name</Label>
+                  <Label htmlFor="fullName">{t('auth.fullname')}</Label>
                   <Input
                     id="fullName"
                     name="fullName"
                     type="text"
-                    placeholder="Enter your full name"
+                    placeholder={t('auth.fullname.placeholder')}
                     value={formData.fullName}
                     onChange={handleInputChange}
                     required
                     className="h-12"
+                    dir={isRTL ? 'rtl' : 'ltr'}
                   />
                 </div>
               )}
               
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t('auth.email')}</Label>
                 <Input
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder={t('auth.email.placeholder')}
                   value={formData.email}
                   onChange={handleInputChange}
                   required
                   className="h-12"
+                  dir="ltr"
                 />
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">{t('auth.password')}</Label>
                 <Input
                   id="password"
                   name="password"
                   type="password"
-                  placeholder="Enter your password"
+                  placeholder={t('auth.password.placeholder')}
                   value={formData.password}
                   onChange={handleInputChange}
                   required
                   className="h-12"
+                  dir="ltr"
                 />
               </div>
 
@@ -134,8 +141,8 @@ const Auth = () => {
                 disabled={loading}
               >
                 {loading 
-                  ? (isLogin ? 'Signing In...' : 'Creating Account...') 
-                  : (isLogin ? 'Sign In' : 'Create Account')
+                  ? (isLogin ? t('auth.signing.in') : t('auth.creating.account'))
+                  : (isLogin ? t('auth.signin.button') : t('auth.signup.button'))
                 }
               </Button>
             </form>
@@ -143,14 +150,14 @@ const Auth = () => {
             {/* Switch between login/register */}
             <div className="mt-6 text-center">
               <p className="text-gray-600">
-                {isLogin ? "Don't have an account?" : "Already have an account?"}
+                {isLogin ? t('auth.no.account') : t('auth.have.account')}
               </p>
               <Button
                 variant="link"
                 onClick={() => setIsLogin(!isLogin)}
                 className="text-primary-600 hover:text-primary-700 font-medium p-0 h-auto"
               >
-                {isLogin ? 'Sign up here' : 'Sign in here'}
+                {isLogin ? t('auth.signup.here') : t('auth.signin.here')}
               </Button>
             </div>
 
@@ -158,7 +165,7 @@ const Auth = () => {
             <div className="mt-4 text-center">
               <Link to="/">
                 <Button variant="ghost" className="text-gray-500 hover:text-gray-700">
-                  ← Back to Home
+                  {t('auth.back.home')}
                 </Button>
               </Link>
             </div>
@@ -167,7 +174,7 @@ const Auth = () => {
 
         {/* Additional info */}
         <div className="mt-6 text-center text-sm text-gray-500">
-          <p>By continuing, you agree to our Terms of Service and Privacy Policy</p>
+          <p>{t('auth.terms')}</p>
         </div>
       </div>
     </div>
