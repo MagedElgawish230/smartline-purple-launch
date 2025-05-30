@@ -11,6 +11,7 @@ import AboutSection from '../components/AboutSection';
 import DownloadSection from '../components/DownloadSection';
 import PromotionsSection from '../components/PromotionsSection';
 import TestimonialsSection from '../components/TestimonialsSection';
+import FeedbackRatingSection from '../components/FeedbackRatingSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 
@@ -28,6 +29,7 @@ const Index = () => {
         <DownloadSection />
         <PromotionsSection />
         <TestimonialsSection />
+        <FeedbackRatingSection />
         <ContactSection />
         <Footer />
       </div>

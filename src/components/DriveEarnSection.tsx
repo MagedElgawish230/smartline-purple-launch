@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { Link } from 'react-router-dom';
 
 const DriveEarnSection = () => {
   const { t, isRTL } = useLanguage();
@@ -31,9 +32,11 @@ const DriveEarnSection = () => {
             </p>
 
             <div className="space-y-4">
-              <button className="bg-primary-600 text-white px-8 py-4 rounded-lg font-medium hover:bg-primary-700 transition-colors text-lg">
-                {t('drive.cta')}
-              </button>
+              <Link to="/auth?mode=signup">
+                <button className="bg-primary-600 text-white px-8 py-4 rounded-lg font-medium hover:bg-primary-700 transition-colors text-lg">
+                  Get Started
+                </button>
+              </Link>
               
               <p className="text-gray-600">
                 {t('drive.signin.text')} <span className="underline cursor-pointer hover:text-gray-900">{t('drive.signin.link')}</span>
