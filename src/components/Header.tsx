@@ -1,12 +1,17 @@
 
 import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, User } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 import LanguageToggle from './LanguageToggle';
+import AuthModal from './AuthModal';
+import { Button } from './ui/button';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t, isRTL } = useLanguage();
+  const { user, signOut } = useAuth();
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-primary-600 backdrop-blur-lg border-b border-primary-700 z-50">
@@ -15,7 +20,9 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-white">SmartLine</h1>
+              <Link to="/">
+                <h1 className="text-2xl font-bold text-white">SmartLine</h1>
+              </Link>
             </div>
           </div>
 
@@ -30,6 +37,27 @@ const Header = () => {
             <a href="#contact" className="text-white hover:text-primary-200 font-medium transition-colors">
               {t('nav.contact')}
             </a>
+            
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <Link to="/dashboard">
+                  <Button variant="ghost" className="text-white hover:text-primary-200">
+                    <User className="h-4 w-4 mr-2" />
+                    Profile
+                  </Button>
+                </Link>
+                <Button variant="ghost" onClick={signOut} className="text-white hover:text-primary-200">
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <AuthModal>
+                <Button variant="ghost" className="text-white hover:text-primary-200">
+                  Sign In
+                </Button>
+              </AuthModal>
+            )}
+            
             <LanguageToggle />
           </nav>
 
@@ -70,6 +98,33 @@ const Header = () => {
               >
                 {t('nav.contact')}
               </a>
+              
+              {user ? (
+                <>
+                  <Link 
+                    to="/dashboard"
+                    className="text-white hover:text-primary-200 font-medium transition-colors px-2 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Profile
+                  </Link>
+                  <button
+                    onClick={() => {
+                      signOut();
+                      setIsMenuOpen(false);
+                    }}
+                    className="text-white hover:text-primary-200 font-medium transition-colors px-2 py-1 text-left"
+                  >
+                    Sign Out
+                  </button>
+                </>
+              ) : (
+                <AuthModal>
+                  <span className="text-white hover:text-primary-200 font-medium transition-colors px-2 py-1 cursor-pointer">
+                    Sign In
+                  </span>
+                </AuthModal>
+              )}
             </nav>
           </div>
         )}
