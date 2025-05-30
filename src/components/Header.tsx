@@ -50,11 +50,18 @@ const Header = () => {
                 </Button>
               </div>
             ) : (
-              <Link to="/auth">
-                <Button variant="ghost" className="text-white hover:text-primary-200">
-                  Sign In
-                </Button>
-              </Link>
+              <div className="flex items-center space-x-4">
+                <Link to="/auth?mode=login">
+                  <Button variant="ghost" className="text-white hover:text-primary-200">
+                    Login
+                  </Button>
+                </Link>
+                <Link to="/auth?mode=signup">
+                  <Button className="bg-white text-primary-600 hover:bg-gray-100">
+                    Sign Up
+                  </Button>
+                </Link>
+              </div>
             )}
             
             <LanguageToggle />
@@ -118,13 +125,22 @@ const Header = () => {
                   </button>
                 </>
               ) : (
-                <Link
-                  to="/auth"
-                  className="text-white hover:text-primary-200 font-medium transition-colors px-2 py-1"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Sign In
-                </Link>
+                <>
+                  <Link
+                    to="/auth?mode=login"
+                    className="text-white hover:text-primary-200 font-medium transition-colors px-2 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/auth?mode=signup"
+                    className="text-white hover:text-primary-200 font-medium transition-colors px-2 py-1"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Sign Up
+                  </Link>
+                </>
               )}
             </nav>
           </div>

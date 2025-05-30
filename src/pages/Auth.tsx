@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -8,10 +8,22 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useAuth } from '@/contexts/AuthContext';
 
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const location = useLocation();
+  const [isLogin, setIsLogin] = useState(false); // Default to signup
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { signIn, signUp } = useAuth();
+
+  // Check if we should show login or signup based on URL or query params
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const mode = urlParams.get('mode');
+    if (mode === 'login') {
+      setIsLogin(true);
+    } else if (mode === 'signup') {
+      setIsLogin(false);
+    }
+  }, [location]);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -60,12 +72,12 @@ const Auth = () => {
         <Card className="shadow-xl border-0">
           <CardHeader className="space-y-1 text-center">
             <CardTitle className="text-2xl font-bold">
-              {isLogin ? 'Welcome Back' : 'Create Account'}
+              {isLogin ? 'Welcome Back' : 'Get Started'}
             </CardTitle>
             <CardDescription>
               {isLogin 
                 ? 'Sign in to your account to continue' 
-                : 'Sign up to get started with SmartLine'
+                : 'Create your SmartLine account today'
               }
             </CardDescription>
           </CardHeader>
