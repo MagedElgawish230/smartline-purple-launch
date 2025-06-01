@@ -42,6 +42,84 @@ export type Database = {
         }
         Relationships: []
       }
+      driver_applications: {
+        Row: {
+          car_back_photo_url: string | null
+          car_front_photo_url: string | null
+          created_at: string | null
+          criminal_record_url: string | null
+          driver_card_url: string | null
+          driver_photo_url: string | null
+          driving_license_url: string | null
+          earnings: number | null
+          email: string
+          first_name: string
+          id: string
+          identity_number: string
+          identity_type: string
+          is_active: boolean | null
+          last_name: string
+          leadership_license_url: string | null
+          password_confirmation: string
+          phone: string
+          rating: number | null
+          status: string | null
+          total_trips: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          car_back_photo_url?: string | null
+          car_front_photo_url?: string | null
+          created_at?: string | null
+          criminal_record_url?: string | null
+          driver_card_url?: string | null
+          driver_photo_url?: string | null
+          driving_license_url?: string | null
+          earnings?: number | null
+          email: string
+          first_name: string
+          id?: string
+          identity_number: string
+          identity_type: string
+          is_active?: boolean | null
+          last_name: string
+          leadership_license_url?: string | null
+          password_confirmation: string
+          phone: string
+          rating?: number | null
+          status?: string | null
+          total_trips?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          car_back_photo_url?: string | null
+          car_front_photo_url?: string | null
+          created_at?: string | null
+          criminal_record_url?: string | null
+          driver_card_url?: string | null
+          driver_photo_url?: string | null
+          driving_license_url?: string | null
+          earnings?: number | null
+          email?: string
+          first_name?: string
+          id?: string
+          identity_number?: string
+          identity_type?: string
+          is_active?: boolean | null
+          last_name?: string
+          leadership_license_url?: string | null
+          password_confirmation?: string
+          phone?: string
+          rating?: number | null
+          status?: string | null
+          total_trips?: number | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       driver_locations: {
         Row: {
           driver_id: string
@@ -221,6 +299,7 @@ export type Database = {
       }
       profiles: {
         Row: {
+          admin_role: Database["public"]["Enums"]["admin_role"] | null
           avatar_url: string | null
           created_at: string | null
           email: string
@@ -234,6 +313,7 @@ export type Database = {
           updated_at: string | null
         }
         Insert: {
+          admin_role?: Database["public"]["Enums"]["admin_role"] | null
           avatar_url?: string | null
           created_at?: string | null
           email: string
@@ -247,6 +327,7 @@ export type Database = {
           updated_at?: string | null
         }
         Update: {
+          admin_role?: Database["public"]["Enums"]["admin_role"] | null
           avatar_url?: string | null
           created_at?: string | null
           email?: string
@@ -547,6 +628,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
+      admin_role: "admin" | "moderator" | "user"
       payment_status: "pending" | "completed" | "failed" | "refunded"
       ride_status:
         | "pending"
@@ -671,6 +753,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      admin_role: ["admin", "moderator", "user"],
       payment_status: ["pending", "completed", "failed", "refunded"],
       ride_status: [
         "pending",

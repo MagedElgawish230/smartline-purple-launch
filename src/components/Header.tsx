@@ -1,151 +1,156 @@
 
 import React, { useState } from 'react';
-import { Menu, X, User } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import LanguageToggle from './LanguageToggle';
-import { Button } from './ui/button';
-import { Link } from 'react-router-dom';
+import AuthModal from './AuthModal';
+import { Button } from '@/components/ui/button';
+import { Settings, User, LogOut } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t, isRTL } = useLanguage();
   const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+
+  // TODO: Replace with actual admin check from user profile
+  const isAdmin = user?.email === 'admin@smartline.com'; // Temporary admin check
+
+  const translations = {
+    en: {
+      home: 'Home',
+      about: 'About',
+      contact: 'Contact',
+      login: 'Sign In',
+      signup: 'Sign Up',
+      dashboard: 'Dashboard',
+      adminDashboard: 'Admin Dashboard',
+      profile: 'Profile',
+      settings: 'Settings',
+      logout: 'Sign Out'
+    },
+    ar: {
+      home: 'الرئيسية',
+      about: 'عن الشركة',
+      contact: 'اتصل بنا',
+      login: 'تسجيل الدخول',
+      signup: 'إنشاء حساب',
+      dashboard: 'لوحة التحكم',
+      adminDashboard: 'لوحة الإدارة',
+      profile: 'الملف الشخصي',
+      settings: 'الإعدادات',
+      logout: 'تسجيل الخروج'
+    }
+  };
+
+  const currentLang = isRTL ? 'ar' : 'en';
+
+  const handleLogin = (mode: 'login' | 'signup') => {
+    setAuthMode(mode);
+    setShowAuthModal(true);
+  };
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-primary-600 backdrop-blur-lg border-b border-primary-700 z-50">
+    <header className={`bg-white shadow-sm sticky top-0 z-50 ${isRTL ? 'font-cairo' : 'font-inter'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center">
-            <div className="flex-shrink-0">
-              <Link to="/">
-                <h1 className="text-2xl font-bold text-white">SmartLine</h1>
-              </Link>
-            </div>
+          <div className="flex-shrink-0">
+            <Link to="/" className="text-2xl font-bold text-primary-600">
+              SmartLine
+            </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
-            <a href="#home" className="text-white hover:text-primary-200 font-medium transition-colors">
-              {t('nav.home')}
+          {/* Navigation */}
+          <nav className="hidden md:flex space-x-8">
+            <Link
+              to="/"
+              className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
+            >
+              {translations[currentLang].home}
+            </Link>
+            <a
+              href="#about"
+              className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
+            >
+              {translations[currentLang].about}
             </a>
-            <a href="#about" className="text-white hover:text-primary-200 font-medium transition-colors">
-              {t('nav.about')}
+            <a
+              href="#contact"
+              className="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
+            >
+              {translations[currentLang].contact}
             </a>
-            <a href="#contact" className="text-white hover:text-primary-200 font-medium transition-colors">
-              {t('nav.contact')}
-            </a>
-            
-            {user ? (
-              <div className="flex items-center space-x-4">
-                <Link to="/dashboard">
-                  <Button variant="ghost" className="text-white hover:text-primary-200">
-                    <User className="h-4 w-4 mr-2" />
-                    Profile
-                  </Button>
-                </Link>
-                <Button variant="ghost" onClick={signOut} className="text-white hover:text-primary-200">
-                  Sign Out
-                </Button>
-              </div>
-            ) : (
-              <div className="flex items-center space-x-4">
-                <Link to="/auth?mode=login">
-                  <Button variant="ghost" className="text-white hover:text-primary-200">
-                    Login
-                  </Button>
-                </Link>
-                <Link to="/auth?mode=signup">
-                  <Button className="bg-white text-primary-600 hover:bg-gray-100">
-                    Sign Up
-                  </Button>
-                </Link>
-              </div>
-            )}
-            
-            <LanguageToggle />
           </nav>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-4 rtl:space-x-reverse">
+          {/* Right side */}
+          <div className="flex items-center space-x-4">
             <LanguageToggle />
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-white hover:text-primary-200 transition-colors"
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
+            
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="flex items-center space-x-2">
+                    <User className="h-4 w-4" />
+                    <span className="hidden sm:inline">{user.email}</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuItem onClick={() => navigate('/dashboard')}>
+                    <User className="h-4 w-4 mr-2" />
+                    {translations[currentLang].dashboard}
+                  </DropdownMenuItem>
+                  {isAdmin && (
+                    <DropdownMenuItem onClick={() => navigate('/admin-dashboard')}>
+                      <Settings className="h-4 w-4 mr-2" />
+                      {translations[currentLang].adminDashboard}
+                    </DropdownMenuItem>
+                  )}
+                  <DropdownMenuItem onClick={handleSignOut}>
+                    <LogOut className="h-4 w-4 mr-2" />
+                    {translations[currentLang].logout}
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <div className="flex items-center space-x-2">
+                <Button
+                  variant="ghost"
+                  onClick={() => handleLogin('login')}
+                  className="text-gray-700 hover:text-primary-600"
+                >
+                  {translations[currentLang].login}
+                </Button>
+                <Button
+                  onClick={() => handleLogin('signup')}
+                  className="bg-primary-600 hover:bg-primary-700 text-white"
+                >
+                  {translations[currentLang].signup}
+                </Button>
+              </div>
+            )}
           </div>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-primary-700">
-            <nav className="flex flex-col space-y-4">
-              <a
-                href="#home"
-                className="text-white hover:text-primary-200 font-medium transition-colors px-2 py-1"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t('nav.home')}
-              </a>
-              <a
-                href="#about"
-                className="text-white hover:text-primary-200 font-medium transition-colors px-2 py-1"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t('nav.about')}
-              </a>
-              <a
-                href="#contact"
-                className="text-white hover:text-primary-200 font-medium transition-colors px-2 py-1"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t('nav.contact')}
-              </a>
-              
-              {user ? (
-                <>
-                  <Link 
-                    to="/dashboard"
-                    className="text-white hover:text-primary-200 font-medium transition-colors px-2 py-1"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Profile
-                  </Link>
-                  <button
-                    onClick={() => {
-                      signOut();
-                      setIsMenuOpen(false);
-                    }}
-                    className="text-white hover:text-primary-200 font-medium transition-colors px-2 py-1 text-left"
-                  >
-                    Sign Out
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link
-                    to="/auth?mode=login"
-                    className="text-white hover:text-primary-200 font-medium transition-colors px-2 py-1"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    to="/auth?mode=signup"
-                    className="text-white hover:text-primary-200 font-medium transition-colors px-2 py-1"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Sign Up
-                  </Link>
-                </>
-              )}
-            </nav>
-          </div>
-        )}
       </div>
+
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        mode={authMode}
+      />
     </header>
   );
 };
