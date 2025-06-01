@@ -66,6 +66,17 @@ const translations = {
     'about.affordable.title': 'Affordable Prices',
     'about.affordable.description': 'Transparent pricing with no hidden fees. Pay what you see upfront.',
     
+    // Founder Section
+    'founder.title': 'About the Founder',
+    'founder.question': 'Who is the founder of SmartLine Smart Transportation Company?',
+    'founder.intro': 'Behind every successful project is an idea, and behind every strong idea is a founder who believes in it.',
+    'founder.bio': 'Dr. Mina Saad is the founder of SmartLine Smart Transportation Company, a young Egyptian from Assiut Governorate who is only 25 years old, but he has managed to make his mark in one of the most vital sectors in Egypt, which is the smart transportation sector.',
+    'founder.vision': 'With an ambitious vision and constant pursuit of development, Dr. Mina founded SmartLine with the goal of becoming the first 100% Egyptian smart transportation company, competing strongly and creating a qualitative shift in the style of transportation within Egypt. His vision is not limited to success in Cairo only, but includes the spread of the company in all governorates of Egypt, especially the Upper Egypt governorates that really need safe, fast and smart transportation solutions.',
+    'founder.goal.title': '🚗 Our Goal at SmartLine',
+    'founder.goal.description': 'We strive at SmartLine to provide distinguished service to captains and customers, with a professional system that supports the driver and rewards his diligence, and provides the customer with a smart, comfortable, and safe journey.',
+    'founder.mission.title': '🌍 Our Vision',
+    'founder.mission.description': 'To be the leading Egyptian company in the field of smart transportation, and to contribute effectively to the development of the transportation system, while providing decent job opportunities for young people and achieving an advanced transportation experience worthy of the Egyptian citizen.',
+    
     // Download Section
     'download.title': 'Download SmartLine',
     'download.subtitle': 'Get the app and start your journey',
@@ -186,6 +197,17 @@ const translations = {
     'about.speed.description': 'احصل على رحلة في دقائق مع خوارزمية المطابقة المتقدمة وشبكة السائقين الواسعة.',
     'about.affordable.title': 'أسعار معقولة',
     'about.affordable.description': 'تسعير شفاف بدون رسوم خفية. ادفع ما تراه مقدماً.',
+    
+    // Founder Section
+    'founder.title': 'عن المؤسس',
+    'founder.question': 'من هو مؤسس شركة سمارت لاين للنقل الذكي؟',
+    'founder.intro': 'وراء كل مشروع ناجح فكرة، ووراء كل فكرة قوية مؤسس مؤمن بها.',
+    'founder.bio': 'دكتور مينا سعد هو مؤسس شركة سمارت لاين للنقل الذكي، شاب مصري من محافظة أسيوط يبلغ من العمر 25 سنة فقط، لكنه استطاع أن يضع بصمته في واحدة من أهم القطاعات الحيوية في مصر وهو قطاع النقل الذكي.',
+    'founder.vision': 'برؤية طموحة وسعي دائم للتطوير، أسس دكتور مينا شركة سمارت لاين بهدف أن تصبح أول شركة نقل ذكي مصرية 100%، تنافس بقوة وتُحدث نقلة نوعية في أسلوب التنقل داخل مصر. رؤيته لا تقتصر على النجاح في القاهرة فقط، بل تشمل انتشار الشركة في جميع محافظات مصر، وخاصة محافظات الصعيد التي تحتاج بالفعل إلى حلول نقل آمنة وسريعة وذكية.',
+    'founder.goal.title': '🚗 هدفنا في سمارت لاين',
+    'founder.goal.description': 'نسعى في سمارت لاين لتقديم خدمة مميزة للكباتن والعملاء، بنظام احترافي يدعم السائق ويكافئ اجتهاده، ويقدّم للعميل رحلة ذكية، مريحة، وآمنة.',
+    'founder.mission.title': '🌍 رؤيتنا',
+    'founder.mission.description': 'أن نكون الشركة المصرية الرائدة في مجال النقل الذكي، وأن نساهم بشكل فعّال في تطوير منظومة النقل، مع توفير فرص عمل محترمة للشباب وتحقيق تجربة تنقل متطورة تليق بالمواطن المصري',
     
     // Download Section
     'download.title': 'تحميل سمارت لاين',

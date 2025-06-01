@@ -8,6 +8,7 @@ import RecentActivitySection from '../components/RecentActivitySection';
 import DriveEarnSection from '../components/DriveEarnSection';
 import EasierInAppsSection from '../components/EasierInAppsSection';
 import AboutSection from '../components/AboutSection';
+import FounderSection from '../components/FounderSection';
 import DownloadSection from '../components/DownloadSection';
 import PromotionsSection from '../components/PromotionsSection';
 import TestimonialsSection from '../components/TestimonialsSection';
@@ -26,6 +27,7 @@ const Index = () => {
         <DriveEarnSection />
         <EasierInAppsSection />
         <AboutSection />
+        <FounderSection />
         <DownloadSection />
         <PromotionsSection />
         <TestimonialsSection />
