@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Language = 'en' | 'ar';
@@ -141,7 +140,42 @@ const translations = {
     'footer.cookies': 'Cookie Policy',
     'footer.follow': 'Follow Us',
     'footer.rights': '© 2024 SmartLine. All rights reserved.',
-    'footer.tagline': 'Your Smart Ride Solution'
+    'footer.tagline': 'Your Smart Ride Solution',
+    
+    // Feedback Section
+    'feedback.title': 'Share Your Feedback',
+    'feedback.subtitle': 'Help us improve SmartLine by sharing your experience and rating our service',
+    'feedback.rate': 'Rate Your Experience',
+    'feedback.message': 'Your Feedback',
+    'feedback.placeholder': 'Tell us about your experience with SmartLine...',
+    'feedback.submit': 'Submit Feedback',
+    'feedback.thanks': 'Thank You!',
+    'feedback.success': 'Thank you for your feedback! We appreciate your input.',
+    'feedback.help': 'Your feedback helps us provide better service to all our users',
+    
+    // Driver Registration
+    'driver.title': 'Driver Registration',
+    'driver.firstName': 'First Name',
+    'driver.lastName': 'Last Name',
+    'driver.email': 'Email',
+    'driver.phone': 'Phone Number',
+    'driver.idType': 'ID Type',
+    'driver.idNumber': 'ID Number',
+    'driver.password': 'Password',
+    'driver.confirmPassword': 'Confirm Password',
+    'driver.driverPhoto': 'Driver Photo',
+    'driver.drivingLicense': 'Driving License',
+    'driver.leadershipLicense': 'Leadership License',
+    'driver.driverCard': 'Driver Card',
+    'driver.carFront': 'Car Front Photo',
+    'driver.carBack': 'Car Back Photo',
+    'driver.criminalRecord': 'Criminal Record',
+    'driver.submit': 'Submit Application',
+    'driver.chooseFile': 'Choose File',
+    'driver.selectIdType': 'Select ID Type',
+    'driver.nationalId': 'National ID',
+    'driver.passport': 'Passport',
+    'driver.driverLicense': 'Driver License',
   },
   ar: {
     // Navigation
@@ -273,7 +307,42 @@ const translations = {
     'footer.cookies': 'سياسة ملفات تعريف الارتباط',
     'footer.follow': 'تابعنا',
     'footer.rights': '© 2024 سمارت لاين. جميع الحقوق محفوظة.',
-    'footer.tagline': 'حلك الذكي للتنقل'
+    'footer.tagline': 'حلك الذكي للتنقل',
+    
+    // Feedback Section
+    'feedback.title': 'شارك رأيك',
+    'feedback.subtitle': 'ساعدنا في تحسين سمارت لاين من خلال مشاركة تجربتك وتقييم خدمتنا',
+    'feedback.rate': 'قيم تجربتك',
+    'feedback.message': 'رأيك',
+    'feedback.placeholder': 'أخبرنا عن تجربتك مع سمارت لاين...',
+    'feedback.submit': 'إرسال التقييم',
+    'feedback.thanks': 'شكراً لك!',
+    'feedback.success': 'شكراً لك على رأيك! نقدر مساهمتك.',
+    'feedback.help': 'رأيك يساعدنا في تقديم خدمة أفضل لجميع مستخدمينا',
+    
+    // Driver Registration
+    'driver.title': 'إضافة سائق',
+    'driver.firstName': 'الاسم الأول',
+    'driver.lastName': 'الاسم الأخير',
+    'driver.email': 'البريد الإلكتروني',
+    'driver.phone': 'رقم الهاتف',
+    'driver.idType': 'نوع الهوية',
+    'driver.idNumber': 'رقم الهوية',
+    'driver.password': 'كلمة المرور',
+    'driver.confirmPassword': 'تأكيد كلمة المرور',
+    'driver.driverPhoto': 'صورة السائق',
+    'driver.drivingLicense': 'رخصة السيارة',
+    'driver.leadershipLicense': 'رخصة القيادة',
+    'driver.driverCard': 'بطاقة السائق',
+    'driver.carFront': 'صورة أمامية السيارة',
+    'driver.carBack': 'صورة خلفية السيارة',
+    'driver.criminalRecord': 'التقرير الجنائي',
+    'driver.submit': 'إضافة السائق',
+    'driver.chooseFile': 'اختر ملف',
+    'driver.selectIdType': 'اختر نوع الهوية',
+    'driver.nationalId': 'هوية وطنية',
+    'driver.passport': 'جواز سفر',
+    'driver.driverLicense': 'رخصة قيادة',
   }
 };
 

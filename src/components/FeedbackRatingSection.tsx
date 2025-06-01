@@ -38,15 +38,37 @@ const FeedbackRatingSection = () => {
     });
   };
 
+  const getRatingText = () => {
+    const ratings = {
+      en: {
+        1: 'Poor',
+        2: 'Fair', 
+        3: 'Good',
+        4: 'Very Good',
+        5: 'Excellent'
+      },
+      ar: {
+        1: 'ضعيف',
+        2: 'مقبول',
+        3: 'جيد', 
+        4: 'جيد جداً',
+        5: 'ممتاز'
+      }
+    };
+    
+    const currentLang = isRTL ? 'ar' : 'en';
+    return ratings[currentLang][rating as keyof typeof ratings['en']];
+  };
+
   return (
     <section className="py-20 bg-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className={`text-3xl sm:text-4xl font-bold text-gray-900 mb-4 ${isRTL ? 'font-cairo' : 'font-inter'}`}>
-            Share Your Feedback
+            {t('feedback.title')}
           </h2>
           <p className={`text-xl text-gray-600 max-w-2xl mx-auto ${isRTL ? 'font-cairo' : 'font-inter'}`}>
-            Help us improve SmartLine by sharing your experience and rating our service
+            {t('feedback.subtitle')}
           </p>
         </div>
 
@@ -55,18 +77,14 @@ const FeedbackRatingSection = () => {
             {/* Star Rating */}
             <div className="text-center">
               <label className={`block text-lg font-medium text-gray-900 mb-4 ${isRTL ? 'font-cairo' : 'font-inter'}`}>
-                Rate Your Experience
+                {t('feedback.rate')}
               </label>
-              <div className="flex justify-center space-x-2 mb-2">
+              <div className={`flex justify-center space-x-2 mb-2 ${isRTL ? 'space-x-reverse' : ''}`}>
                 {renderStars()}
               </div>
               {rating > 0 && (
                 <p className={`text-sm text-gray-600 ${isRTL ? 'font-cairo' : 'font-inter'}`}>
-                  {rating === 1 && 'Poor'}
-                  {rating === 2 && 'Fair'}
-                  {rating === 3 && 'Good'}
-                  {rating === 4 && 'Very Good'}
-                  {rating === 5 && 'Excellent'}
+                  {getRatingText()}
                 </p>
               )}
             </div>
@@ -74,14 +92,14 @@ const FeedbackRatingSection = () => {
             {/* Feedback Text */}
             <div>
               <label htmlFor="feedback" className={`block text-lg font-medium text-gray-900 mb-2 ${isRTL ? 'font-cairo' : 'font-inter'}`}>
-                Your Feedback
+                {t('feedback.message')}
               </label>
               <textarea
                 id="feedback"
                 rows={4}
                 value={feedback}
                 onChange={(e) => setFeedback(e.target.value)}
-                placeholder="Tell us about your experience with SmartLine..."
+                placeholder={t('feedback.placeholder')}
                 className={`w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none ${isRTL ? 'font-cairo text-right' : 'font-inter'}`}
               />
             </div>
@@ -93,14 +111,14 @@ const FeedbackRatingSection = () => {
                 disabled={rating === 0 || !feedback.trim()}
                 className="bg-primary-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
               >
-                {submitted ? 'Thank You!' : 'Submit Feedback'}
+                {submitted ? t('feedback.thanks') : t('feedback.submit')}
               </button>
             </div>
 
             {submitted && (
               <div className="text-center">
                 <p className={`text-green-600 font-medium ${isRTL ? 'font-cairo' : 'font-inter'}`}>
-                  Thank you for your feedback! We appreciate your input.
+                  {t('feedback.success')}
                 </p>
               </div>
             )}
@@ -110,7 +128,7 @@ const FeedbackRatingSection = () => {
         {/* Additional Info */}
         <div className="text-center mt-8">
           <p className={`text-gray-500 text-sm ${isRTL ? 'font-cairo' : 'font-inter'}`}>
-            Your feedback helps us provide better service to all our users
+            {t('feedback.help')}
           </p>
         </div>
       </div>
