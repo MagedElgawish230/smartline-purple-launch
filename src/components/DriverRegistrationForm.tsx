@@ -25,12 +25,12 @@ const DriverRegistrationForm = ({ onSubmit, loading = false }: DriverRegistratio
     password: '',
     passwordConfirmation: '',
     driverPhoto: null as File | null,
-    drivingLicense: null as File | null,
-    leadershipLicense: null as File | null,
-    driverCard: null as File | null,
-    carFrontPhoto: null as File | null,
-    carBackPhoto: null as File | null,
-    criminalRecord: null as File | null,
+    drivingLicense: [] as File[],
+    leadershipLicense: [] as File[],
+    driverCard: [] as File[],
+    carFrontPhoto: [] as File[],
+    carBackPhoto: [] as File[],
+    criminalRecord: [] as File[],
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,11 +41,19 @@ const DriverRegistrationForm = ({ onSubmit, loading = false }: DriverRegistratio
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, fieldName: string) => {
-    const file = e.target.files?.[0] || null;
-    setFormData({
-      ...formData,
-      [fieldName]: file,
-    });
+    const files = Array.from(e.target.files || []);
+    
+    if (fieldName === 'driverPhoto') {
+      setFormData({
+        ...formData,
+        [fieldName]: files[0] || null,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [fieldName]: files,
+      });
+    }
   };
 
   const handleSelectChange = (value: string) => {
@@ -63,48 +71,67 @@ const DriverRegistrationForm = ({ onSubmit, loading = false }: DriverRegistratio
   const FileUploadField = ({ 
     label, 
     fieldName, 
-    required = false 
+    required = false,
+    multiple = false 
   }: { 
     label: string; 
     fieldName: string; 
     required?: boolean;
-  }) => (
-    <div className="space-y-2">
-      <Label htmlFor={fieldName} className={isRTL ? 'font-cairo' : 'font-inter'}>
-        {label} {required && '*'}
-      </Label>
-      <div className="flex items-center space-x-2 rtl:space-x-reverse">
-        <Input
-          id={fieldName}
-          type="file"
-          onChange={(e) => handleFileChange(e, fieldName)}
-          accept="image/*,.pdf"
-          className="hidden"
-        />
-        <Button
-          type="button"
-          variant="outline"
-          onClick={() => document.getElementById(fieldName)?.click()}
-          className={`flex-1 justify-start ${isRTL ? 'font-cairo' : 'font-inter'}`}
-        >
-          {formData[fieldName as keyof typeof formData] 
-            ? (formData[fieldName as keyof typeof formData] as File)?.name 
-            : t('driver.chooseFile')
-          }
-        </Button>
+    multiple?: boolean;
+  }) => {
+    const fieldValue = formData[fieldName as keyof typeof formData];
+    const hasFiles = multiple 
+      ? Array.isArray(fieldValue) && fieldValue.length > 0
+      : fieldValue !== null;
+    
+    const getDisplayText = () => {
+      if (!hasFiles) return t('driver.chooseFile');
+      
+      if (multiple && Array.isArray(fieldValue)) {
+        return fieldValue.length === 1 
+          ? fieldValue[0].name 
+          : `${fieldValue.length} files selected`;
+      }
+      
+      return (fieldValue as File)?.name || t('driver.chooseFile');
+    };
+
+    return (
+      <div className="space-y-2">
+        <Label htmlFor={fieldName} className={isRTL ? 'font-cairo' : 'font-inter'}>
+          {label} {required && '*'}
+        </Label>
+        <div className="flex items-center space-x-2 rtl:space-x-reverse">
+          <Input
+            id={fieldName}
+            type="file"
+            onChange={(e) => handleFileChange(e, fieldName)}
+            accept="image/*,.pdf"
+            multiple={multiple}
+            className="hidden"
+          />
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => document.getElementById(fieldName)?.click()}
+            className={`flex-1 justify-start ${isRTL ? 'font-cairo' : 'font-inter'}`}
+          >
+            {getDisplayText()}
+          </Button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
-    <Card className="w-full max-w-4xl mx-auto">
+    <Card className="w-full">
       <CardHeader>
-        <CardTitle className={`text-center text-2xl ${isRTL ? 'font-cairo' : 'font-inter'}`}>
+        <CardTitle className={`text-center text-xl ${isRTL ? 'font-cairo' : 'font-inter'}`}>
           {t('driver.title')}
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4">
           {/* Personal Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
@@ -118,7 +145,7 @@ const DriverRegistrationForm = ({ onSubmit, loading = false }: DriverRegistratio
                 value={formData.firstName}
                 onChange={handleInputChange}
                 required
-                className={`h-12 ${isRTL ? 'font-cairo text-right' : 'font-inter'}`}
+                className={`h-10 ${isRTL ? 'font-cairo text-right' : 'font-inter'}`}
               />
             </div>
 
@@ -133,7 +160,7 @@ const DriverRegistrationForm = ({ onSubmit, loading = false }: DriverRegistratio
                 value={formData.lastName}
                 onChange={handleInputChange}
                 required
-                className={`h-12 ${isRTL ? 'font-cairo text-right' : 'font-inter'}`}
+                className={`h-10 ${isRTL ? 'font-cairo text-right' : 'font-inter'}`}
               />
             </div>
           </div>
@@ -150,7 +177,7 @@ const DriverRegistrationForm = ({ onSubmit, loading = false }: DriverRegistratio
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                className={`h-12 ${isRTL ? 'font-cairo text-right' : 'font-inter'}`}
+                className={`h-10 ${isRTL ? 'font-cairo text-right' : 'font-inter'}`}
               />
             </div>
 
@@ -165,7 +192,7 @@ const DriverRegistrationForm = ({ onSubmit, loading = false }: DriverRegistratio
                 value={formData.phone}
                 onChange={handleInputChange}
                 required
-                className={`h-12 ${isRTL ? 'font-cairo text-right' : 'font-inter'}`}
+                className={`h-10 ${isRTL ? 'font-cairo text-right' : 'font-inter'}`}
               />
             </div>
           </div>
@@ -176,7 +203,7 @@ const DriverRegistrationForm = ({ onSubmit, loading = false }: DriverRegistratio
                 {t('driver.idType')} *
               </Label>
               <Select onValueChange={handleSelectChange} required>
-                <SelectTrigger className="h-12">
+                <SelectTrigger className="h-10">
                   <SelectValue placeholder={t('driver.selectIdType')} />
                 </SelectTrigger>
                 <SelectContent>
@@ -198,7 +225,7 @@ const DriverRegistrationForm = ({ onSubmit, loading = false }: DriverRegistratio
                 value={formData.identityNumber}
                 onChange={handleInputChange}
                 required
-                className={`h-12 ${isRTL ? 'font-cairo text-right' : 'font-inter'}`}
+                className={`h-10 ${isRTL ? 'font-cairo text-right' : 'font-inter'}`}
               />
             </div>
           </div>
@@ -215,7 +242,7 @@ const DriverRegistrationForm = ({ onSubmit, loading = false }: DriverRegistratio
                 value={formData.password}
                 onChange={handleInputChange}
                 required
-                className={`h-12 ${isRTL ? 'font-cairo text-right' : 'font-inter'}`}
+                className={`h-10 ${isRTL ? 'font-cairo text-right' : 'font-inter'}`}
               />
             </div>
 
@@ -230,14 +257,14 @@ const DriverRegistrationForm = ({ onSubmit, loading = false }: DriverRegistratio
                 value={formData.passwordConfirmation}
                 onChange={handleInputChange}
                 required
-                className={`h-12 ${isRTL ? 'font-cairo text-right' : 'font-inter'}`}
+                className={`h-10 ${isRTL ? 'font-cairo text-right' : 'font-inter'}`}
               />
             </div>
           </div>
 
           {/* File Uploads */}
           <div className="space-y-4">
-            <h3 className={`text-lg font-semibold ${isRTL ? 'font-cairo' : 'font-inter'}`}>
+            <h3 className={`text-base font-semibold ${isRTL ? 'font-cairo' : 'font-inter'}`}>
               Required Documents
             </h3>
             
@@ -251,39 +278,44 @@ const DriverRegistrationForm = ({ onSubmit, loading = false }: DriverRegistratio
                 label={t('driver.drivingLicense')} 
                 fieldName="drivingLicense" 
                 required 
+                multiple
               />
               <FileUploadField 
                 label={t('driver.leadershipLicense')} 
                 fieldName="leadershipLicense" 
                 required 
+                multiple
               />
               <FileUploadField 
                 label={t('driver.driverCard')} 
                 fieldName="driverCard" 
                 required 
+                multiple
               />
               <FileUploadField 
                 label={t('driver.carFront')} 
                 fieldName="carFrontPhoto" 
                 required 
+                multiple
               />
               <FileUploadField 
                 label={t('driver.carBack')} 
                 fieldName="carBackPhoto" 
                 required 
+                multiple
               />
             </div>
             
             <FileUploadField 
               label={t('driver.criminalRecord')} 
               fieldName="criminalRecord" 
-              required 
+              multiple
             />
           </div>
 
           <Button 
             type="submit" 
-            className="w-full h-12 text-lg font-medium bg-primary-600 hover:bg-primary-700"
+            className="w-full h-10 text-base font-medium bg-primary-600 hover:bg-primary-700"
             disabled={loading}
           >
             {loading ? 'Submitting...' : t('driver.submit')}
