@@ -8,6 +8,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useAuth } from '@/contexts/AuthContext';
 import DriverRegistrationForm from '@/components/DriverRegistrationForm';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 const Auth = () => {
   const location = useLocation();
@@ -16,6 +18,7 @@ const Auth = () => {
   const [userRole, setUserRole] = useState<'passenger' | 'driver'>('passenger');
   const navigate = useNavigate();
   const { signIn, signUp } = useAuth();
+  const { toast } = useToast();
 
   // Check if we should show login or signup based on URL or query params
   useEffect(() => {
@@ -55,10 +58,61 @@ const Auth = () => {
     setLoading(true);
     try {
       console.log('Driver registration data:', driverData);
-      // Create account with driver role
-      await signUp(driverData.email, driverData.password, `${driverData.firstName} ${driverData.lastName}`, 'driver');
-    } catch (error) {
+      
+      // First create the user account
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: driverData.email,
+        password: driverData.password,
+        options: {
+          data: {
+            full_name: `${driverData.firstName} ${driverData.lastName}`,
+            role: 'driver'
+          }
+        }
+      });
+
+      if (authError) throw authError;
+
+      if (authData.user) {
+        // Store driver application in database
+        const { error: dbError } = await supabase
+          .from('driver_applications')
+          .insert({
+            user_id: authData.user.id,
+            first_name: driverData.firstName,
+            last_name: driverData.lastName,
+            email: driverData.email,
+            phone: driverData.phone,
+            identity_type: driverData.identityType,
+            identity_number: driverData.identityNumber,
+            password_confirmation: driverData.passwordConfirmation,
+            driver_photo_url: driverData.driverPhotoUrl,
+            driving_license_url: driverData.drivingLicenseUrls?.[0],
+            leadership_license_url: driverData.leadershipLicenseUrls?.[0],
+            driver_card_url: driverData.driverCardUrls?.[0],
+            car_front_photo_url: driverData.carFrontUrls?.[0],
+            car_back_photo_url: driverData.carBackUrls?.[0],
+            criminal_record_url: driverData.criminalRecordUrls?.[0],
+            status: 'pending'
+          });
+
+        if (dbError) {
+          console.error('Database error:', dbError);
+          throw dbError;
+        }
+
+        toast({
+          title: "Registration Successful",
+          description: "Your driver application has been submitted. Please check your email to verify your account.",
+        });
+      }
+    } catch (error: any) {
       console.error('Driver registration error:', error);
+      toast({
+        title: "Registration Failed",
+        description: error.message || "Failed to register driver",
+        variant: "destructive",
+      });
     }
     setLoading(false);
   };

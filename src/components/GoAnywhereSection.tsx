@@ -78,7 +78,7 @@ const GoAnywhereSection = () => {
           <div className={`${isRTL ? 'lg:order-1' : ''}`}>
             <div className="relative">
               <img
-                src="/lovable-uploads/edc2c4f4-1ce3-420f-ad53-d8686f0da808.png"
+                src="/lovable-uploads/017993f4-959f-4c9c-8b3a-ef124d31bbf5.png"
                 alt={t('go.image.alt')}
                 className="w-full h-auto rounded-lg shadow-lg"
               />

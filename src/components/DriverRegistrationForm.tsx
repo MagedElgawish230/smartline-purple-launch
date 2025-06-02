@@ -6,6 +6,8 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { uploadDriverPhoto, uploadDriverDocument } from '@/utils/fileUpload';
+import { useToast } from '@/hooks/use-toast';
 
 interface DriverRegistrationFormProps {
   onSubmit: (data: any) => void;
@@ -14,6 +16,8 @@ interface DriverRegistrationFormProps {
 
 const DriverRegistrationForm = ({ onSubmit, loading = false }: DriverRegistrationFormProps) => {
   const { t, isRTL } = useLanguage();
+  const { toast } = useToast();
+  const [uploading, setUploading] = useState(false);
   
   const [formData, setFormData] = useState({
     firstName: '',
@@ -63,9 +67,117 @@ const DriverRegistrationForm = ({ onSubmit, loading = false }: DriverRegistratio
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const uploadFiles = async (userId: string) => {
+    const uploadedUrls: any = {};
+    
+    // Upload driver photo
+    if (formData.driverPhoto) {
+      const photoUrl = await uploadDriverPhoto(formData.driverPhoto, userId, 'driver_photo');
+      if (photoUrl) uploadedUrls.driverPhotoUrl = photoUrl;
+    }
+
+    // Upload driving license files
+    if (formData.drivingLicense.length > 0) {
+      const urls = [];
+      for (let i = 0; i < formData.drivingLicense.length; i++) {
+        const url = await uploadDriverDocument(formData.drivingLicense[i], userId, 'driving_license', i);
+        if (url) urls.push(url);
+      }
+      uploadedUrls.drivingLicenseUrls = urls;
+    }
+
+    // Upload leadership license files
+    if (formData.leadershipLicense.length > 0) {
+      const urls = [];
+      for (let i = 0; i < formData.leadershipLicense.length; i++) {
+        const url = await uploadDriverDocument(formData.leadershipLicense[i], userId, 'leadership_license', i);
+        if (url) urls.push(url);
+      }
+      uploadedUrls.leadershipLicenseUrls = urls;
+    }
+
+    // Upload driver card files
+    if (formData.driverCard.length > 0) {
+      const urls = [];
+      for (let i = 0; i < formData.driverCard.length; i++) {
+        const url = await uploadDriverDocument(formData.driverCard[i], userId, 'driver_card', i);
+        if (url) urls.push(url);
+      }
+      uploadedUrls.driverCardUrls = urls;
+    }
+
+    // Upload car front photo files
+    if (formData.carFrontPhoto.length > 0) {
+      const urls = [];
+      for (let i = 0; i < formData.carFrontPhoto.length; i++) {
+        const url = await uploadDriverDocument(formData.carFrontPhoto[i], userId, 'car_front', i);
+        if (url) urls.push(url);
+      }
+      uploadedUrls.carFrontUrls = urls;
+    }
+
+    // Upload car back photo files
+    if (formData.carBackPhoto.length > 0) {
+      const urls = [];
+      for (let i = 0; i < formData.carBackPhoto.length; i++) {
+        const url = await uploadDriverDocument(formData.carBackPhoto[i], userId, 'car_back', i);
+        if (url) urls.push(url);
+      }
+      uploadedUrls.carBackUrls = urls;
+    }
+
+    // Upload criminal record files
+    if (formData.criminalRecord.length > 0) {
+      const urls = [];
+      for (let i = 0; i < formData.criminalRecord.length; i++) {
+        const url = await uploadDriverDocument(formData.criminalRecord[i], userId, 'criminal_record', i);
+        if (url) urls.push(url);
+      }
+      uploadedUrls.criminalRecordUrls = urls;
+    }
+
+    return uploadedUrls;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    
+    if (formData.password !== formData.passwordConfirmation) {
+      toast({
+        title: "Error",
+        description: "Passwords do not match",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setUploading(true);
+    
+    // Generate a temporary user ID for file organization
+    const tempUserId = Date.now().toString();
+    
+    try {
+      // Upload files first
+      const uploadedUrls = await uploadFiles(tempUserId);
+      
+      // Combine form data with uploaded file URLs
+      const submissionData = {
+        ...formData,
+        ...uploadedUrls,
+        tempUserId,
+      };
+      
+      await onSubmit(submissionData);
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast({
+        title: "Error",
+        description: "Failed to submit driver registration",
+        variant: "destructive",
+      });
+    } finally {
+      setUploading(false);
+    }
   };
 
   const FileUploadField = ({ 
@@ -316,9 +428,9 @@ const DriverRegistrationForm = ({ onSubmit, loading = false }: DriverRegistratio
           <Button 
             type="submit" 
             className="w-full h-10 text-base font-medium bg-primary-600 hover:bg-primary-700"
-            disabled={loading}
+            disabled={loading || uploading}
           >
-            {loading ? 'Submitting...' : t('driver.submit')}
+            {uploading ? 'Uploading files...' : loading ? 'Submitting...' : t('driver.submit')}
           </Button>
         </form>
       </CardContent>
