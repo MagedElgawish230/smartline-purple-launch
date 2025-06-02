@@ -11,7 +11,7 @@ import DriverRegistrationForm from '@/components/DriverRegistrationForm';
 
 const Auth = () => {
   const location = useLocation();
-  const [isLogin, setIsLogin] = useState(false); // Default to signup
+  const [isLogin, setIsLogin] = useState(false);
   const [loading, setLoading] = useState(false);
   const [userRole, setUserRole] = useState<'passenger' | 'driver'>('passenger');
   const navigate = useNavigate();
@@ -41,10 +41,8 @@ const Auth = () => {
     try {
       if (isLogin) {
         await signIn(formData.email, formData.password);
-        navigate('/');
       } else {
-        await signUp(formData.email, formData.password, formData.fullName);
-        navigate('/');
+        await signUp(formData.email, formData.password, formData.fullName, userRole);
       }
     } catch (error) {
       console.error('Auth error:', error);
@@ -56,11 +54,9 @@ const Auth = () => {
   const handleDriverRegistration = async (driverData: any) => {
     setLoading(true);
     try {
-      // Here you would submit the driver application data
       console.log('Driver registration data:', driverData);
-      // For now, just create a regular account
-      await signUp(driverData.email, driverData.password, `${driverData.firstName} ${driverData.lastName}`);
-      navigate('/');
+      // Create account with driver role
+      await signUp(driverData.email, driverData.password, `${driverData.firstName} ${driverData.lastName}`, 'driver');
     } catch (error) {
       console.error('Driver registration error:', error);
     }

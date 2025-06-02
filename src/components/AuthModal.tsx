@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -82,7 +83,7 @@ const AuthModal = ({ children, isOpen, onClose, mode = 'login' }: AuthModalProps
     e.preventDefault();
     setLoading(true);
     try {
-      await signUp(signUpData.email, signUpData.password, signUpData.fullName);
+      await signUp(signUpData.email, signUpData.password, signUpData.fullName, 'passenger');
       setOpen(false);
       setSignUpData({ fullName: '', email: '', password: '' });
     } catch (error) {
