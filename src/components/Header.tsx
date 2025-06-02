@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '@/contexts/AuthContext';
 import LanguageToggle from './LanguageToggle';
-import AuthModal from './AuthModal';
 import { Button } from '@/components/ui/button';
 import { Settings, User, LogOut } from 'lucide-react';
 import {
@@ -18,8 +17,6 @@ const Header = () => {
   const { t, isRTL } = useLanguage();
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
 
   // TODO: Replace with actual admin check from user profile
   const isAdmin = user?.email === 'admin@smartline.com'; // Temporary admin check
@@ -53,9 +50,12 @@ const Header = () => {
 
   const currentLang = isRTL ? 'ar' : 'en';
 
-  const handleLogin = (mode: 'login' | 'signup') => {
-    setAuthMode(mode);
-    setShowAuthModal(true);
+  const handleLogin = () => {
+    navigate('/auth?mode=login');
+  };
+
+  const handleSignup = () => {
+    navigate('/auth?mode=signup');
   };
 
   const handleSignOut = async () => {
@@ -129,13 +129,13 @@ const Header = () => {
               <div className="flex items-center space-x-2">
                 <Button
                   variant="ghost"
-                  onClick={() => handleLogin('login')}
+                  onClick={handleLogin}
                   className="text-gray-700 hover:text-primary-600"
                 >
                   {translations[currentLang].login}
                 </Button>
                 <Button
-                  onClick={() => handleLogin('signup')}
+                  onClick={handleSignup}
                   className="bg-primary-600 hover:bg-primary-700 text-white"
                 >
                   {translations[currentLang].signup}
@@ -145,12 +145,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-
-      <AuthModal
-        isOpen={showAuthModal}
-        onClose={() => setShowAuthModal(false)}
-        mode={authMode}
-      />
     </header>
   );
 };
