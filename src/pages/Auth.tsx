@@ -10,6 +10,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import DriverRegistrationForm from '@/components/DriverRegistrationForm';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { uploadDriverPhoto, uploadDriverDocument } from '@/utils/fileUpload';
 
 const Auth = () => {
   const location = useLocation();
@@ -54,6 +55,78 @@ const Auth = () => {
     setLoading(false);
   };
 
+  const uploadFilesWithUserId = async (driverData: any, userId: string) => {
+    const uploadedUrls: any = {};
+    
+    // Upload driver photo
+    if (driverData.driverPhoto) {
+      const photoUrl = await uploadDriverPhoto(driverData.driverPhoto, userId, 'driver_photo');
+      if (photoUrl) uploadedUrls.driverPhotoUrl = photoUrl;
+    }
+
+    // Upload driving license files
+    if (driverData.drivingLicense && driverData.drivingLicense.length > 0) {
+      const urls = [];
+      for (let i = 0; i < driverData.drivingLicense.length; i++) {
+        const url = await uploadDriverDocument(driverData.drivingLicense[i], userId, 'driving_license', i);
+        if (url) urls.push(url);
+      }
+      uploadedUrls.drivingLicenseUrls = urls;
+    }
+
+    // Upload leadership license files
+    if (driverData.leadershipLicense && driverData.leadershipLicense.length > 0) {
+      const urls = [];
+      for (let i = 0; i < driverData.leadershipLicense.length; i++) {
+        const url = await uploadDriverDocument(driverData.leadershipLicense[i], userId, 'leadership_license', i);
+        if (url) urls.push(url);
+      }
+      uploadedUrls.leadershipLicenseUrls = urls;
+    }
+
+    // Upload driver card files
+    if (driverData.driverCard && driverData.driverCard.length > 0) {
+      const urls = [];
+      for (let i = 0; i < driverData.driverCard.length; i++) {
+        const url = await uploadDriverDocument(driverData.driverCard[i], userId, 'driver_card', i);
+        if (url) urls.push(url);
+      }
+      uploadedUrls.driverCardUrls = urls;
+    }
+
+    // Upload car front photo files
+    if (driverData.carFrontPhoto && driverData.carFrontPhoto.length > 0) {
+      const urls = [];
+      for (let i = 0; i < driverData.carFrontPhoto.length; i++) {
+        const url = await uploadDriverDocument(driverData.carFrontPhoto[i], userId, 'car_front', i);
+        if (url) urls.push(url);
+      }
+      uploadedUrls.carFrontUrls = urls;
+    }
+
+    // Upload car back photo files
+    if (driverData.carBackPhoto && driverData.carBackPhoto.length > 0) {
+      const urls = [];
+      for (let i = 0; i < driverData.carBackPhoto.length; i++) {
+        const url = await uploadDriverDocument(driverData.carBackPhoto[i], userId, 'car_back', i);
+        if (url) urls.push(url);
+      }
+      uploadedUrls.carBackUrls = urls;
+    }
+
+    // Upload criminal record files
+    if (driverData.criminalRecord && driverData.criminalRecord.length > 0) {
+      const urls = [];
+      for (let i = 0; i < driverData.criminalRecord.length; i++) {
+        const url = await uploadDriverDocument(driverData.criminalRecord[i], userId, 'criminal_record', i);
+        if (url) urls.push(url);
+      }
+      uploadedUrls.criminalRecordUrls = urls;
+    }
+
+    return uploadedUrls;
+  };
+
   const handleDriverRegistration = async (driverData: any) => {
     setLoading(true);
     try {
@@ -74,6 +147,9 @@ const Auth = () => {
       if (authError) throw authError;
 
       if (authData.user) {
+        // Now upload files with the real user ID
+        const uploadedUrls = await uploadFilesWithUserId(driverData, authData.user.id);
+        
         // Store driver application in database
         const { error: dbError } = await supabase
           .from('driver_applications')
@@ -86,13 +162,13 @@ const Auth = () => {
             identity_type: driverData.identityType,
             identity_number: driverData.identityNumber,
             password_confirmation: driverData.passwordConfirmation,
-            driver_photo_url: driverData.driverPhotoUrl,
-            driving_license_url: driverData.drivingLicenseUrls?.[0],
-            leadership_license_url: driverData.leadershipLicenseUrls?.[0],
-            driver_card_url: driverData.driverCardUrls?.[0],
-            car_front_photo_url: driverData.carFrontUrls?.[0],
-            car_back_photo_url: driverData.carBackUrls?.[0],
-            criminal_record_url: driverData.criminalRecordUrls?.[0],
+            driver_photo_url: uploadedUrls.driverPhotoUrl,
+            driving_license_url: uploadedUrls.drivingLicenseUrls?.[0],
+            leadership_license_url: uploadedUrls.leadershipLicenseUrls?.[0],
+            driver_card_url: uploadedUrls.driverCardUrls?.[0],
+            car_front_photo_url: uploadedUrls.carFrontUrls?.[0],
+            car_back_photo_url: uploadedUrls.carBackUrls?.[0],
+            criminal_record_url: uploadedUrls.criminalRecordUrls?.[0],
             status: 'pending'
           });
 
